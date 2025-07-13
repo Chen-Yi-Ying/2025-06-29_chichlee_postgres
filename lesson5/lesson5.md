@@ -23,10 +23,11 @@ INSERT INTO student(name, major) VALUES('小綠',NULL);
 ### 如存在則刪除既有表格
 
 ```sql
-DROP TABLE IF EXISTS employee;
+DROP TABLE IF EXISTS employee CASCADE;
+DROP TABLE IF EXISTS branch CASCADE;
 ```
 
-### 新建表格
+### 新建表格和主鍵
 
 ```sql
 CREATE TABLE employee(
@@ -39,4 +40,26 @@ CREATE TABLE employee(
 	sup_id INT,
  	PRIMARY KEY(emp_id)
 );
+```
+
+### 建foreign key
+
+```sql
+CREATE TABLE branch(
+	 branch_id INT,
+	 branch_name VARCHAR(20),
+	 manager_id INT,
+	 PRIMARY KEY(branch_id),
+	 FOREIGN KEY(manager_id) REFERENCES employee(emp_id) ON DELETE SET NULL
+);
+```
+
+### 建foreign key
+
+```sql
+ALTER TABLE employee ADD FOREIGN KEY (branch_id)
+REFERENCES branch(branch_id) ON DELETE SET NULL;
+
+ALTER TABLE employee ADD FOREIGN KEY (sup_id)
+REFERENCES employee(emp_id) ON DELETE SET NULL;
 ```
