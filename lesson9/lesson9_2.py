@@ -24,6 +24,7 @@ def get_user_name()->str:
     return name
 
 def play_game(name:str)->None:
+    i = 0
     """
     猜數字遊戲函式。
 
