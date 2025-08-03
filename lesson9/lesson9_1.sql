@@ -1,0 +1,30 @@
+select count(*) as "筆數"
+from "台鐵車站資訊";
+
+select count(name) as "台北車站數"
+from "台鐵車站資訊"
+where "stationAddrTw" like '%臺北%';
+
+select count(*)
+from "每日各站進出站人數" left join "台鐵車站資訊"
+on "車站代碼" = "stationCode"
+where "stationName" = '基隆'
+
+/*
+ * 全省各站點2022年進站總人數-自己的版本
+ */
+
+select "stationName" as 站名, sum("進站人數") as 總人數
+from "每日各站進出站人數" left join "台鐵車站資訊"
+on "車站代碼" = "stationCode"
+where "日期" between to_date('2022/01/01','YYYY/MM/DD') and to_date('2022/12/31','YYYY/MM/DD')
+group by "stationName"
+
+/*
+ * 全省各站點2022年進站總人數-老師的版本
+ */
+
+SELECT "name" AS 站名,COUNT("name") AS 筆數,AVG("進站人數") AS "進站人數"
+FROM "每日各站進出站人數" LEFT JOIN "台鐵車站資訊" ON "車站代碼" = "stationCode"
+WHERE "日期" BETWEEN '2022-01-01' AND '2022-12-31'
+GROUP BY "name"
