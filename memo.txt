@@ -1,0 +1,17 @@
+gpt-oss playground
+
+https://openai.com/zh-Hant/index/introducing-chatgpt-agent/
+
+https://dashboard.render.com/login
+
+=====
+
+conda activate pydev
+
+deactivate
+
+pip install psycopg2-binary
+
+pip install -r requirements.txt
+
+pip list
