@@ -39,9 +39,8 @@ st.write("您選擇的日期:", selected_date)
 # 查詢資料並顯示
 @st.cache_data
 def fetch_station_data(station, selected_date):
-    # 請確認 datasource.py 有下方這個函數，或根據實際情況修改名稱
-    # 如果沒有 get_station_info，請將下行函數名稱改為正確的，例如 get_station_data
-    return datasource_mine.get_station_data(station, selected_date)
+    # 假設 start_date 和 end_date 都設為 selected_date
+    return datasource_mine.get_station_data(station, selected_date, selected_date)
 
 data = fetch_station_data(station, selected_date)
 if data is not None and not data.empty:
