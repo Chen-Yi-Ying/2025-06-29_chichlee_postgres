@@ -7,6 +7,14 @@
         "@modelcontextprotocol/server-postgres",
         "postgresql://postgres:raspberry@host.docker.internal:5432/postgres"
       ]
+    },
+    "render_postgres": {
+        "command": "npx",
+        "args": [
+        "-y",
+        "@modelcontextprotocol/server-postgres",
+        "postgresql://chichlee_sunday_user:5YlGHkZTIAZMyEDcaYK1fhjuHDV1UfYR@dpg-d2bvmomr433s73a6t2jg-a.singapore-postgres.render.com/chichlee_sunday?sslmode=require"
+      ]
     }
     },
 }
