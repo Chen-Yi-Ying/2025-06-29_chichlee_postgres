@@ -36,5 +36,27 @@ def get_station_data(station, selected_date):
         return None
     finally:
         # Ensure resources are released properly
+                if 'conn' in locals():
+                    conn.close()
+
+def get_all_stations():
+    try:
+        conn = psycopg2.connect(
+            host=os.getenv("HOST"),
+            database=os.getenv("DATABASE"),
+            user=os.getenv("USER"),
+            password=os.getenv("PASSWORD"),
+            port=os.getenv("PORT", "5432")
+        )
+        query = 'SELECT DISTINCT "stationName" FROM "台鐵車站資訊";'
+        df = pd.read_sql(query, conn)
+        return df["stationName"].tolist()
+    except psycopg2.Error as e:
+        print(f"資料庫連線或查詢失敗：{e}")
+        return []
+    except Exception as e:
+        print(f"發生未預期的錯誤：{e}")
+        return []
+    finally:
         if 'conn' in locals():
             conn.close()

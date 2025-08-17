@@ -1,5 +1,5 @@
 import streamlit as st
-import lesson11.datasource_mine as datasource_mine
+import datasource_mine
 from datetime import date
 
 st.sidebar.title("台鐵車站資訊")
@@ -9,7 +9,8 @@ st.subheader("進出站人數顯示區")
 @st.cache_resource
 def get_stations():
     """取得車站資料"""
-    return datasource_mine.get_stations_names()
+    # 假設有一個 get_all_stations() 回傳所有車站名稱
+    return datasource_mine.get_all_stations()
 
 stations = get_stations()
 if stations is None:
@@ -37,12 +38,12 @@ st.write("您選擇的日期:", selected_date)
 
 # 查詢資料並顯示
 @st.cache_data
-def get_station_data(station, selected_date):
+def fetch_station_data(station, selected_date):
     # 請確認 datasource.py 有下方這個函數，或根據實際情況修改名稱
     # 如果沒有 get_station_info，請將下行函數名稱改為正確的，例如 get_station_data
     return datasource_mine.get_station_data(station, selected_date)
 
-data = get_station_data(station, selected_date)
+data = fetch_station_data(station, selected_date)
 if data is not None and not data.empty:
     st.dataframe(data)
 else:
