@@ -22,7 +22,7 @@ if stations is None:
     st.stop()
 
 
-common_stations = ['臺北','桃園','新竹','台中','臺南','高雄','其它']
+common_stations = ['臺北','桃園','新竹','臺中','臺南','高雄','其它']
 
 choice = st.sidebar.radio("快速選擇常用車站", common_stations)
 
