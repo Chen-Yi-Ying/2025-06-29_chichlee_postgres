@@ -69,6 +69,7 @@ st.write("日期範圍:", start_date, "至", end_date)
 
 import pandas as pd
 
+# 取得指定車站與日期範圍的進出站人數資料
 data = datasource.get_station_data_by_date(station, start_date, end_date)
 if data is None:
     st.error("無法取得車站資料，請稍後再試。")
@@ -79,10 +80,13 @@ else:
             df = data
         else:
             df = pd.DataFrame(data)
+        # 確保有欄位名稱，若沒有則加上預設欄位名稱
+        if df.columns.tolist() == list(range(len(df.columns))):
+            df.columns = ["日期", "車站", "進站人數", "出站人數"]
     except Exception:
         # 如果直接轉換失敗，嘗試先將資料轉為 list（支援 generator 等）
         try:
-            df = pd.DataFrame(list(data))
+            df = pd.DataFrame(list(data), columns=["日期", "車站", "進站人數", "出站人數"])
         except Exception as e:
             st.error(f"處理資料時發生錯誤: {e}")
             df = None
@@ -104,3 +108,5 @@ else:
         except Exception:
             # 若無 download_button（非常舊版 streamlit），則忽略下載功能
             pass
+
+        
